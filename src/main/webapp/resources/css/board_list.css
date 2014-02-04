@@ -1,0 +1,81 @@
+@CHARSET "EUC-KR";
+
+/* Board 테이블 기본 설정 */
+#board_list th, #board_list td{
+	padding: 5px;
+}
+#board_list th{
+	background: #BDBDBD;
+}
+#board_list tr{
+	background: #EAEAEA;
+}
+#board_list td{
+	/* background: white; */
+}
+#board_list{
+	font-size: 12px;
+	text-align: center;
+}
+#board_list a{
+	text-decoration: none;
+	color: black;
+}
+#bt_writing{
+	margin-top: 5px;
+	margin-left: 550px;
+}
+
+
+/*크기설정  */
+#board_list #title{
+	width: 480px;	
+}#board_list #writer{
+	width: 150px;	
+}#board_list #date{
+	width: 100px;	
+}
+#board_list_table_size{
+	border: solid 2px #BDBDBD;
+	height: 300px;
+	width: 620px;
+	background: white;
+}
+#board_list tr{
+	height: 25px;
+}
+#board_page_set{
+	width: 560px;
+	height: 20px;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+#board_page_set a{
+	color: gray;
+	text-decoration: none;
+	text-align: center;
+}
+
+/* Board 페이지  */
+#link_page{
+	padding: 5px;
+}
+
+
+/* 접속 id 설정  */
+#access_group{
+	margin-left: 370px;
+	display: inline;
+}
+
+
+/*  Home 설정   */
+#home a{
+	text-decoration: none;
+	color: black;
+}
+#home{
+	display: inline;
+}

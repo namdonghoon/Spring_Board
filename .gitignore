@@ -1,0 +1,15 @@
+# eclipse config
+
+.classpath
+.project
+.settings
+.springBeans
+.metadata
+
+#maven
+target
+
+#mac os
+.DS_Store
+*.swp
+*~
