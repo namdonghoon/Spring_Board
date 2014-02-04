@@ -1,45 +1,53 @@
 package com.member.domain;
 
 public class Member {
-	private String member_Email;
-	private String member_name;
-	private String member_pass;
-	private String member_conpass;
+	private String emailId;
+	private String name;
+	private String pass;
+	private String conpass;
 	
 	public Member(){}
 
-	public Member(String member_Email, String member_name, String member_pass,
-			String member_conpass) {
+	
+
+	public Member(String emailId, String name, String pass, String conpass) {
 		super();
-		this.member_Email = member_Email;
-		this.member_name = member_name;
-		this.member_pass = member_pass;
-		this.member_conpass = member_conpass;
+		this.emailId = emailId;
+		this.name = name;
+		this.pass = pass;
+		this.conpass = conpass;
 	}
 
-	public String getMember_Email() {
-		return member_Email;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setMember_Email(String member_Email) {
-		this.member_Email = member_Email;
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
-	public String getMember_name() {
-		return member_name;
+
+	public String getName() {
+		return name;
 	}
-	public void setMember_name(String member_name) {
-		this.member_name = member_name;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getMember_pass() {
-		return member_pass;
+
+	public String getPass() {
+		return pass;
 	}
-	public void setMember_pass(String member_pass) {
-		this.member_pass = member_pass;
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
-	public String getMember_conpass() {
-		return member_conpass;
+
+	public String getConpass() {
+		return conpass;
 	}
-	public void setMember_conpass(String member_conpass) {
-		this.member_conpass = member_conpass;
+
+	public void setConpass(String conpass) {
+		this.conpass = conpass;
 	}
 	
 	

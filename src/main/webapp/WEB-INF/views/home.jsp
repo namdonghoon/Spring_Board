@@ -15,15 +15,15 @@
 
 
 
-<spring:hasBindErrors name="command_login"/>
+<spring:hasBindErrors name="commandLogin"/>
 <h3>로그인</h3>
-<div id="login_form">
+<div id="login_form"> 
 	<form action="login" method="post"> 
-		<label>이메일 : </label><input name="member_Email" type="email">
-		<form:errors path="command_login.member_Email"/>
+		<label>이메일 : </label><input name="emailId" type="email">
+		<form:errors path="commandLogin.emailId"/>
 		<br>
-		<label>암  호 : </label><input name="member_pass" type="password">
-		<form:errors path="command_login.member_pass"/>
+		<label>암  호 : </label><input name="pass" type="password">
+		<form:errors path="commandLogin.pass"/>
 		<br>
 		<input type="submit" value="로그인">
 	</form>
@@ -31,24 +31,24 @@
 <hr>
 
 <div id="insert_form">
-<spring:hasBindErrors name="command_join"/>
+<spring:hasBindErrors name="commandJoin"/>
 <h3>회원 가입폼</h3>
-<form action="member_insert" method="post"> 
+<form action="saveMember" method="post"> 
 	<label>이메일 : </label>
-		<input id="Email_id" name="member_Email" type="email" value="${member_Email}">
-		<form:errors path="command_join.member_Email"/>
+		<input id="Email_id" name="emailId" type="email" value="${emailId}">
+		<form:errors path="commandJoin.emailId"/>
 	<br>
 	<label>이  름 : </label>
-	<input name="member_name" type="text">
-		<form:errors path="command_join.member_name"/>
+	<input name="name" type="text">
+		<form:errors path="commandJoin.name"/>
 	<br>
 	<label>암  호 : </label>
-	<input name="member_pass" type="password">
-		<form:errors path="command_join.member_pass"/> 
+	<input name="pass" type="password">
+		<form:errors path="commandJoin.pass"/> 
 	<br>
 	<label>암호확인 : </label>
-	<input name="member_conpass" type="password">
-		<form:errors path="command_join.member_conpass"/>
+	<input name="conpass" type="password">
+		<form:errors path="commandJoin.conpass"/>
 	<br>
 	<input type="submit" value="회원가입">
 </form>

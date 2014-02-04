@@ -26,8 +26,8 @@ public class WriterValidator implements org.springframework.validation.Validator
 	public void validate(Object command, Errors errors) {
 		Board board = (Board) command;
 		
-		if(board.getBoard_title() == ""){
-			errors.rejectValue("board_title", "", "제목을 입력해주세요");
+		if(board.getTitle() == ""){
+			errors.rejectValue("title", "", "제목을 입력해주세요");
 		}
 		
 	}

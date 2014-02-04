@@ -3,56 +3,63 @@ package com.member.domain;
 import java.sql.Timestamp;
 
 public class Board {
-	private int board_num;
-	private String board_Email;
-	private String board_title;
-	private String board_content;
-	private Timestamp board_date;
+	private int numberId;
+	private String email;
+	private String title;
+	private String content;
+	private Timestamp date;
 	
 	public Board(){}
 	
-	
-	public Board(int board_num, String board_Email, String board_title,
-			String board_content, Timestamp board_date) {
+	public Board(int numberId, String email, String title, String content,
+			Timestamp date) {
 		super();
-		this.board_num = board_num;
-		this.board_Email = board_Email;
-		this.board_title = board_title;
-		this.board_content = board_content;
-		this.board_date = board_date;
+		this.numberId = numberId;
+		this.email = email;
+		this.title = title;
+		this.content = content;
+		this.date = date;
 	}
 
+	public int getNumberId() {
+		return numberId;
+	}
+	public void setNumberId(int numberId) {
+		this.numberId = numberId;
+	}
 
-	public int getBoard_num() {
-		return board_num;
+	public String getEmail() {
+		return email;
 	}
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getBoard_Email() {
-		return board_Email;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setBoard_Email(String board_Email) {
-		this.board_Email = board_Email;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getBoard_title() {
-		return board_title;
+
+	public String getContent() {
+		return content;
 	}
-	public void setBoard_title(String board_title) {
-		this.board_title = board_title;
+
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getBoard_content() {
-		return board_content;
+
+	public Timestamp getDate() {
+		return date;
 	}
-	public void setBoard_content(String board_content) {
-		this.board_content = board_content;
+
+	public void setDate(Timestamp date) {
+		this.date = date;
 	}
-	public Timestamp getBoard_date() {
-		return board_date;
-	}
-	public void setBoard_date(Timestamp board_date) {
-		this.board_date = board_date;
-	}
+
 	
 	
 	

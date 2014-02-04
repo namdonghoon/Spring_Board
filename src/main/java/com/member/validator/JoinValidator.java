@@ -24,23 +24,23 @@ public class JoinValidator implements org.springframework.validation.Validator{
 	@Override
 	public void validate(Object command, Errors errors) {
 		Member member = (Member) command;
-		String Email_id = member.getMember_Email();
-		String Email_pass = member.getMember_pass();
-		String Email_conpass = member.getMember_conpass();
+		String emailId = member.getEmailId();
+		String pass = member.getPass();
+		String conpass = member.getConpass();
 		
 		
-		if(Email_id == ""){
-			errors.rejectValue("member_Email", "", "이메일을 입력해주세요.");
-		}if(Email_id.indexOf("@") > 14){
-			errors.rejectValue("member_Email", "", "길이를 초과하였습니다.");
+		if(emailId == ""){
+			errors.rejectValue("emailId", "", "이메일을 입력해주세요.");
+		}if(emailId.indexOf("@") > 14){
+			errors.rejectValue("emailId", "", "길이를 초과하였습니다.");
 		}
 		
-		if(member.getMember_name() == ""){
-			errors.rejectValue("member_name", "", "이름을 입력해주세요");
-		}if(member.getMember_pass() == ""){
-			errors.rejectValue("member_pass", "", "패스워드를 입력해주세요");
-		}if(!Email_pass.equals(Email_conpass)){
-			errors.rejectValue("member_conpass", "", "암호가 일치하지 않습니다.");
+		if(member.getName() == ""){
+			errors.rejectValue("name", "", "이름을 입력해주세요");
+		}if(member.getPass() == ""){
+			errors.rejectValue("pass", "", "패스워드를 입력해주세요");
+		}if(!pass.equals(conpass)){
+			errors.rejectValue("conpass", "", "암호가 일치하지 않습니다.");
 		}
 	}
 

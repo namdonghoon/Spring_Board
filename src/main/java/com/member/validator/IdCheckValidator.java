@@ -1,18 +1,14 @@
 package com.member.validator;
 
-import java.sql.SQLException;
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import com.member.dao.MemberDao;
 import com.member.domain.Member;
 
 
 
-public class LoginValidator implements org.springframework.validation.Validator{
-	
-	
+public class IdCheckValidator implements org.springframework.validation.Validator{
+
 	//Validator가 해당 클래스에 대한 값 검증을 지원하는지의 여부를 리턴한다.
 	@Override
 	public boolean supports(Class clazz) {
@@ -28,16 +24,10 @@ public class LoginValidator implements org.springframework.validation.Validator{
 	@Override
 	public void validate(Object command, Errors errors) {
 		Member member = (Member) command;
-
-		//값을 입력안했을 때 빈공백 / DB에서의 찾은 값이 없을 때 null로 구분함
-		if (member.getEmailId() == "" ){
-			errors.rejectValue("emailId", "", "이메일을 입력해주세요.");
-		}
-		if (member.getPass() == ""){
-			errors.rejectValue("pass", "", "패스워드를 입력해주세요.");
-		}
-		if(member.getEmailId() == null){
-			errors.rejectValue("emailId", "", "아이디/암호가 틀렸습니다.");
+		String emailId = member.getEmailId();
+		
+		if(emailId != ""){
+			errors.rejectValue("emailId", "", "이미 존재하는 아이디 입니다.");
 		}
 	}
 
