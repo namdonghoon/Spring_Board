@@ -7,7 +7,7 @@
 <head>   
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-<script src="/resources/script/board_home.js" type="text/javascript"></script>
+<script src="/resources/script/board/home.js" type="text/javascript"></script>
 
 <title>Home</title>
 </head>

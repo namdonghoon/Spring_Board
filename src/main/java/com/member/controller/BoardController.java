@@ -69,7 +69,7 @@ public class BoardController {
 	//±Û¾²±â
 	@RequestMapping(value = "/saveBoard", method = RequestMethod.GET)
 	public String save() throws Exception {
-		return "boardSave";
+		return "board/save";
 	}
 	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
 	public String save(
@@ -84,7 +84,7 @@ public class BoardController {
 		new WriterValidator().validate(board, errors);
 		
 		if(errors.hasErrors()){
-			return "boardSave";
+			return "board/save";
 		}else{
 			boardDao.save(board);
 			BoardList(model, START_DEFAULT_PAGE);
@@ -103,7 +103,7 @@ public class BoardController {
 		Board board = boardDao.check(numberId);
 		model.addAttribute("board", board);
 		model.addAttribute("managerId", new MemberController().managerId());
-		return "board_check";
+		return "board/check";
 	}
 	
 	

@@ -7,21 +7,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-<script src="/resources/script/board_check.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/resources/css/board_check.css" type="text/css"/>
+<script src="../resources/script/board/check.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../resources/css/board/check.css" type="text/css"/>
 <title>Insert title here</title>
 </head> 
 <body>
 <h3>선택한 글</h3>
 <form action="updateBoard" method="post">
 <input value="${board.numberId}" name="numberId" type="hidden">
-<input value="${board.emailId}" name="emailid" type="hidden">
 <input value="${accessId}" name="accessId" type="hidden">
 <input value="${managerId}" name="managerId" type="hidden">
+<input value="${board.email}" name="email" type="hidden">
 
 <div>
 	<label>작성자</label>
-	<input value="${board.emailId}" type="text" disabled>
+	<input value="${board.email}" type="text" disabled>
 </div>
 <div>
 	<label>제목</label>

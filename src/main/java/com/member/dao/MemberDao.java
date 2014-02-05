@@ -44,12 +44,12 @@ public class MemberDao {
 	}
 	
 	//회원정보 획득
-	public Member getMember(String id, String pass) throws SQLException {
+	public Member checkMember(String id, String pass) throws SQLException {
 		PreparedStatement  pstmt = null;
 		ResultSet rs = null;
 		Member member = new Member();
 		
-		String sql = "select * from MEMBER where EmailId=? and pass=?";
+		String sql = "select * from Member where emailId=? and pass=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -78,53 +78,18 @@ public class MemberDao {
 		}
 		return member;
 	}
-	//암호 체크
-	public Member passCheck(String id) throws SQLException {
-		ResultSet rs = null;
-		PreparedStatement  pstmt = null;
-		Member member = new Member();
-		
-		try {
-			String sql = "select * from member where EmailId=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) {
-				member.setEmailId(rs.getString(1));
-				member.setName(rs.getString(2));
-				member.setPass(rs.getString(3));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}			
-			if (rs != null) {
-				rs.close();
-			}
-		}
-		return member;
-	}
-
 
 	
 	
 	//아이디 중복 체크 
-	public Member idCheck(String id) throws Exception{
+	public Member idCheck(String emailId) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from Member where EmailId=?";
+		String sql = "select * from Member where emailId=?";
 		Member member = new Member();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, emailId);
 
 			rs = pstmt.executeQuery(); // 결과값을 가져옴
 

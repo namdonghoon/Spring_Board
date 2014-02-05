@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-<script src="/resources/script/board_list.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/resources/css/board_list.css" type="text/css"/>
+<script src="../resources/script/board/list.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../resources/css/board/list.css" type="text/css"/>
 <title>Insert title here</title>
 </head>
  
@@ -51,7 +51,7 @@
 <c:if test="${startPage >= pageMaxCount}"><a id="prev" href="boardList?pageNum=${startPage-pageMaxCount}">이전</a></c:if>
 <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
 	<label for="link_page">
-		<a id="link_page" href="board_list?pageNum=${pageNum}">
+		<a id="link_page" href="boardList?pageNum=${pageNum}">
 			${pageNum}
 		</a>
 	</label>

@@ -23,10 +23,6 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final int START_DEFAULT_PAGE = 0; //최소 시작 페이지 설정 [0부터 시작] 
 	private MemberDao memberDao;
-
-	public MemberController(){
-		System.out.println("MemberController");
-	}
 	
 	public void memberDao(){}
 
@@ -103,21 +99,19 @@ public class MemberController {
 		
 		//로그인
 		@RequestMapping(value="/login", method= RequestMethod.POST)
-		public String loginOK(
+		public String login(
 				Model model, HttpSession session,
 				@ModelAttribute("commandLogin") Member member,
 				BindingResult errors) throws Exception{
 			
 			memberDao = new MemberDao();
-				
+			
 			//DB값(memberDB)과 입력한값(member)과 비교 
 			if(member.getEmailId() != ""){ //이메일을 입력했을 때 DB접근
-				Member memberDB = memberDao.getMember(member.getEmailId(), member.getPass()); 
-				new LoginValidator().validate(memberDB, errors);
-			}else{ //입력안했을 때 입력안한값 체크
-				new LoginValidator().validate(member, errors);
+				member = memberDao.checkMember(member.getEmailId(), member.getPass()); 
 			}
 			
+			new LoginValidator().validate(member, errors);
 			
 			if(errors.hasErrors()){
 				return "home"; //로그인 실패.
