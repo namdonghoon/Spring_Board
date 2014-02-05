@@ -13,7 +13,10 @@ import com.member.dao.BoardDao;
 import com.member.domain.Board;
 import com.member.validator.WriterValidator;
 
+// http://localhost:8080/board/list
+
 @Controller
+@RequestMapping(value="/board")
 public class BoardController {
 	private final int START_DEFAULT_PAGE = 0; //최소 시작 페이지 설정 [0부터 시작] 
 	private final int WRITING_MAX_COUNT = 10;   //한 페이지당 글 수 
