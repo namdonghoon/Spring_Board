@@ -11,7 +11,7 @@
 <body>
 <spring:hasBindErrors name="commandWriter"/>
 <h1>글쓰기 폼</h1>
-<form action="saveBoard" method="post">
+<form action="/board/save" method="post">
 <div>
 	<label>작성자</label>
 	<input value="${accessId}" type="text" disabled>

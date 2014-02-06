@@ -13,8 +13,8 @@
 </head> 
 <body>
 <h3>선택한 글</h3>
-<form action="updateBoard" method="post">
-<input value="${board.numberId}" name="numberId" type="hidden">
+<form action="/board/update" method="post">
+<input value="${board.id}" name="id" type="hidden">
 <input value="${accessId}" name="accessId" type="hidden">
 <input value="${managerId}" name="managerId" type="hidden">
 <input value="${board.email}" name="email" type="hidden">
@@ -34,9 +34,9 @@
 	<input id="bt_update" type="submit" value="수정"> 
 </form>
 
-<form action="deleteBoard" method="post">
+<form action="/board/delete" method="post">
 	<input value="${board.email}" name="email" type="hidden">
-	<input value="${board.numberId}" name="numberId" type="hidden">
+	<input value="${board.id}" name="id" type="hidden">
 	<input id="bt_delete" type="submit" value="삭제">
 
 </form>

@@ -1,9 +1,9 @@
 function boardinsert() {
-	location.href = "saveBoard";
+	location.href = "/board/save";
 }
 function logout(){
 	alert("로그아웃 되었습니다.");
-	location.href = "logout";
+	location.href = "/member/logout";
 }
 
 

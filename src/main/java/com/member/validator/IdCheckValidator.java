@@ -24,10 +24,10 @@ public class IdCheckValidator implements org.springframework.validation.Validato
 	@Override
 	public void validate(Object command, Errors errors) {
 		Member member = (Member) command;
-		String emailId = member.getEmailId();
+		String email = member.getEmail();
 		
-		if(emailId != ""){
-			errors.rejectValue("emailId", "", "이미 존재하는 아이디 입니다.");
+		if(email != ""){
+			errors.rejectValue("email", "", "이미 존재하는 아이디 입니다.");
 		}
 	}
 

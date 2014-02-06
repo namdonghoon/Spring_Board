@@ -24,15 +24,15 @@ public class JoinValidator implements org.springframework.validation.Validator{
 	@Override
 	public void validate(Object command, Errors errors) {
 		Member member = (Member) command;
-		String emailId = member.getEmailId();
+		String email = member.getEmail();
 		String pass = member.getPass();
 		String conpass = member.getConpass();
 		
 		
-		if(emailId == ""){
-			errors.rejectValue("emailId", "", "이메일을 입력해주세요.");
-		}if(emailId.indexOf("@") > 14){
-			errors.rejectValue("emailId", "", "길이를 초과하였습니다.");
+		if(email == ""){
+			errors.rejectValue("email", "", "이메일을 입력해주세요.");
+		}if(email.indexOf("@") > 14){
+			errors.rejectValue("email", "", "길이를 초과하였습니다.");
 		}
 		
 		if(member.getName() == ""){

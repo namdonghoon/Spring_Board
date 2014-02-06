@@ -6,7 +6,11 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>
+		/WEB-INF/spring/root-context.xml
+		classpath:context/**/applicationContext*.xml
+		</param-value>
+		
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -50,7 +54,7 @@
 	
 	
 	<!-- JOSSO  -->
-	<filter>
+	<!--  <filter>
 		<filter-name>jossoAgent</filter-name>
 		<filter-class>pnus.josso.LoginFilter</filter-class> 
 		<init-param>
@@ -84,6 +88,6 @@
 	<filter-mapping>
 		<filter-name>jossoAgent</filter-name>
 		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-	
+	</filter-mapping> -->
+	 
 </web-app>

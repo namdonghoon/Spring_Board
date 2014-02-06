@@ -14,7 +14,7 @@
  
 <body>
 <div id="home"> 
-	<a href="home">Home</a>
+	<a href="#">Home</a>
 </div>
 <div id="access_group">
 	<label>접속아이디: </label> 
@@ -32,8 +32,8 @@
 	</tr>
 	<c:forEach var="list" items="${list}" >
 	<tr>
-		<td>${list.numberId}</td>
-		<td><a href="checkBoard?numberId=${list.numberId}">${list.title}</a></td>
+		<td>${list.id}</td>
+		<td><a href="/board/check?id=${list.id}">${list.title}</a></td>
 		<td>${list.email}</td>
 		<td>
 			<fmt:formatDate value="${list.date}" pattern="MM.dd. hh:mm"/>
@@ -48,15 +48,15 @@
 <input id="startPage" value="${startPage}" type="hidden" >
 <input id="endPage" value="${endPage}" type="hidden" >
 
-<c:if test="${startPage >= pageMaxCount}"><a id="prev" href="boardList?pageNum=${startPage-pageMaxCount}">이전</a></c:if>
+<c:if test="${startPage >= pageMaxCount}"><a id="prev" href="/board/list?pageNum=${startPage-pageMaxCount}">이전</a></c:if>
 <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
 	<label for="link_page">
-		<a id="link_page" href="boardList?pageNum=${pageNum}">
+		<a id="link_page" href="/board/list?pageNum=${pageNum}">
 			${pageNum}
 		</a>
 	</label>
 </c:forEach>
-<c:if test="${startPage + (pageMaxCount-1) <= pageTotalCount}"><a id="next" href="boardList?pageNum=${startPage+pageMaxCount}">다음</a></c:if>
+<c:if test="${startPage + (pageMaxCount-1) <= pageTotalCount}"><a id="next" href="/board/list?pageNum=${startPage+pageMaxCount}">다음</a></c:if>
 </div>
 
 

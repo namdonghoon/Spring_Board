@@ -7,7 +7,7 @@
 <head>   
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
-<script src="/resources/script/board/home.js" type="text/javascript"></script>
+<script src="/resources/script/home.js" type="text/javascript"></script>
 
 <title>Home</title>
 </head>
@@ -18,9 +18,9 @@
 <spring:hasBindErrors name="commandLogin"/>
 <h3>로그인</h3>
 <div id="login_form"> 
-	<form action="login" method="post"> 
-		<label>이메일 : </label><input name="emailId" type="email">
-		<form:errors path="commandLogin.emailId"/>
+	<form action="/member/login" method="post"> 
+		<label>이메일 : </label><input name="email" type="email">
+		<form:errors path="commandLogin.email"/>
 		<br>
 		<label>암  호 : </label><input name="pass" type="password">
 		<form:errors path="commandLogin.pass"/>
@@ -33,10 +33,10 @@
 <div id="insert_form">
 <spring:hasBindErrors name="commandJoin"/>
 <h3>회원 가입폼</h3>
-<form action="saveMember" method="post"> 
+<form action="/member/save" method="post"> 
 	<label>이메일 : </label>
-		<input id="Email_id" name="emailId" type="email" value="${emailId}">
-		<form:errors path="commandJoin.emailId"/>
+		<input id="Email_id" name="email" type="email" value="${email}">
+		<form:errors path="commandJoin.email"/>
 	<br>
 	<label>이  름 : </label>
 	<input name="name" type="text">

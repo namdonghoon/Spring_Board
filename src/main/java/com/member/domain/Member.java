@@ -1,7 +1,7 @@
 package com.member.domain;
 
 public class Member {
-	private String emailId;
+	private String email;
 	private String name;
 	private String pass;
 	private String conpass;
@@ -10,20 +10,20 @@ public class Member {
 
 	
 
-	public Member(String emailId, String name, String pass, String conpass) {
+	public Member(String email, String name, String pass, String conpass) {
 		super();
-		this.emailId = emailId;
+		this.email = email;
 		this.name = name;
 		this.pass = pass;
 		this.conpass = conpass;
 	}
 
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {

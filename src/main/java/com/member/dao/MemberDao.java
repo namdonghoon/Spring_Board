@@ -25,7 +25,7 @@ public class MemberDao {
 		String sql = "insert into MEMBER values(?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getEmailId());
+			pstmt.setString(1, member.getEmail());
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getPass());
 			pstmt.executeUpdate();
@@ -49,7 +49,7 @@ public class MemberDao {
 		ResultSet rs = null;
 		Member member = new Member();
 		
-		String sql = "select * from Member where emailId=? and pass=?";
+		String sql = "select * from Member where email=? and pass=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -58,7 +58,7 @@ public class MemberDao {
 			rs = pstmt.executeQuery(); // 결과값을 가져옴
 
 			if (rs.next()) {
-				member.setEmailId(rs.getString(1));
+				member.setEmail(rs.getString(1));
 				member.setName(rs.getString(2));
 				member.setPass(rs.getString(3));
 			}
@@ -82,19 +82,19 @@ public class MemberDao {
 	
 	
 	//아이디 중복 체크 
-	public Member idCheck(String emailId) throws Exception{
+	public Member idCheck(String email) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from Member where emailId=?";
+		String sql = "select * from Member where email=?";
 		Member member = new Member();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, emailId);
+			pstmt.setString(1, email);
 
 			rs = pstmt.executeQuery(); // 결과값을 가져옴
 
 			if (rs.next()) {
-				member.setEmailId(rs.getString(1));
+				member.setEmail(rs.getString(1));
 				member.setName(rs.getString(2));
 				member.setPass(rs.getString(3));
 			}

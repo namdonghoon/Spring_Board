@@ -30,14 +30,14 @@ public class LoginValidator implements org.springframework.validation.Validator{
 		Member member = (Member) command;
 
 		//값을 입력안했을 때 빈공백 / DB에서의 찾은 값이 없을 때 null로 구분함
-		if (member.getEmailId() == "" ){
-			errors.rejectValue("emailId", "", "이메일을 입력해주세요.");
+		if (member.getEmail() == "" ){
+			errors.rejectValue("email", "", "이메일을 입력해주세요.");
 		}
 		if (member.getPass() == ""){
 			errors.rejectValue("pass", "", "패스워드를 입력해주세요.");
 		}
-		if(member.getEmailId() == null){
-			errors.rejectValue("emailId", "", "아이디/암호가 틀렸습니다.");
+		if(member.getEmail() == null){
+			errors.rejectValue("email", "", "아이디/암호가 틀렸습니다.");
 		}
 	}
 

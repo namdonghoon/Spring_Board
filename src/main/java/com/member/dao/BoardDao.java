@@ -24,7 +24,7 @@ private Connection conn;
 			String sql = "insert into Board values(?,?,?,?,?)";
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, board.getNumberId());
+				pstmt.setInt(1, board.getId());
 				pstmt.setString(2, board.getEmail());
 				pstmt.setString(3, board.getTitle());
 				pstmt.setString(4, board.getContent());
@@ -52,7 +52,7 @@ private Connection conn;
 			int count = 0;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String sql = "select count(numberId) from Board";
+			String sql = "select count(id) from Board";
 			try {
 				//다른 Connection 객체 생성 : 한번의 액션에 두번의 DAO가 접근하기 위함  
 				Connection conn = new DBConnect().getConn();
@@ -75,7 +75,7 @@ private Connection conn;
 			ResultSet rs = null;
 			Board board = null;
 			List<Board> list = new ArrayList<Board>();
-			String sql = "select * from board order by numberId desc limit ?, ?";
+			String sql = "select * from board order by id desc limit ?, ?";
 			try{
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, writeStarNum);  //시작 글  
@@ -84,7 +84,7 @@ private Connection conn;
 				
 				while(rs.next()){
 					board = new Board();
-					board.setNumberId(rs.getInt(1));
+					board.setId(rs.getInt(1));
 					board.setEmail(rs.getString(2));
 					board.setTitle(rs.getString(3));
 					board.setContent(rs.getString(4));
@@ -111,20 +111,20 @@ private Connection conn;
 		}
 		
 		//글 세부정보 
-		public Board check(int numberId) throws Exception{
+		public Board check(int id) throws Exception{
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			Board board =  new Board();
 			
-			String sql = "select * from Board where numberId=?";
+			String sql = "select * from Board where id=?";
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, numberId);
+				pstmt.setInt(1, id);
 
 				rs = pstmt.executeQuery(); // 결과값을 가져옴
 
 				if (rs.next()) {
-					board.setNumberId(rs.getInt(1));
+					board.setId(rs.getInt(1));
 					board.setEmail(rs.getString(2));
 					board.setTitle(rs.getString(3));
 					board.setContent(rs.getString(4));
@@ -145,13 +145,13 @@ private Connection conn;
 
 		
 		//글 삭제 
-		public void delete(int numberId, String accessId) throws SQLException {
+		public void delete(int id, String accessId) throws SQLException {
 			PreparedStatement pstmt = null;
-			String sql = "delete from Board where numberId=? and Email=?";
+			String sql = "delete from Board where id=? and email=?";
 
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, numberId);
+				pstmt.setInt(1, id);
 				pstmt.setString(2, accessId);
 
 				pstmt.executeUpdate();
@@ -176,13 +176,13 @@ private Connection conn;
 			StringBuffer sql = new StringBuffer();
 			sql.append("update Board ");
 			sql.append("set title=?, content=? ");
-			sql.append("where numberId=? and email=?");
+			sql.append("where id=? and email=?");
 			
 			try {
 				pstmt = conn.prepareStatement(sql.toString());
 				pstmt.setString(1, board.getTitle());
 				pstmt.setString(2, board.getContent());
-				pstmt.setInt(3, board.getNumberId());
+				pstmt.setInt(3, board.getId());
 				pstmt.setString(4, accessId);
 				
 				pstmt.executeUpdate();

@@ -3,7 +3,7 @@ package com.member.domain;
 import java.sql.Timestamp;
 
 public class Board {
-	private int numberId;
+	private int id;
 	private String email;
 	private String title;
 	private String content;
@@ -11,21 +11,21 @@ public class Board {
 	
 	public Board(){}
 	
-	public Board(int numberId, String email, String title, String content,
+	public Board(int id, String email, String title, String content,
 			Timestamp date) {
 		super();
-		this.numberId = numberId;
+		this.id = id;
 		this.email = email;
 		this.title = title;
 		this.content = content;
 		this.date = date;
 	}
 
-	public int getNumberId() {
-		return numberId;
+	public int getId() {
+		return id;
 	}
-	public void setNumberId(int numberId) {
-		this.numberId = numberId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

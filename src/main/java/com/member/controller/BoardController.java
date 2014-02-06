@@ -31,11 +31,11 @@ public class BoardController {
 
 
 	//글목록 : 페이징처리 포함
-	@RequestMapping(value = "/boardList", method = RequestMethod.POST)
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String list() {
 		return "board/list";
 	}
-	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam int pageNum, Model model) throws Exception {
 		
 		//limit가 0부터 시작하므로 페이지 1에서 0으로 만들어주기 위해 1을 뺌. 
@@ -70,11 +70,11 @@ public class BoardController {
 	
 	
 	//글쓰기
-	@RequestMapping(value = "/saveBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/save", method = RequestMethod.GET)
 	public String save() throws Exception {
 		return "board/save";
 	}
-	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(
 			Model model,
 			HttpSession session,
@@ -99,11 +99,11 @@ public class BoardController {
 	
 	
 	//글 조회 : 관리자 id. 뷰로 전송 
-	@RequestMapping(value = "/checkBoard", method = RequestMethod.GET)
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(
-			Model model, @RequestParam int numberId) throws Exception{
+			Model model, @RequestParam int id) throws Exception{
 		boardDao = new BoardDao();
-		Board board = boardDao.check(numberId);
+		Board board = boardDao.check(id);
 		model.addAttribute("board", board);
 		model.addAttribute("managerId", new MemberController().managerId());
 		return "board/check";
@@ -111,7 +111,7 @@ public class BoardController {
 	
 	
 	//글 삭제 - 세션 아이디가 일치한지 비교한 후 권한 설정.
-	@RequestMapping(value = "/deleteBoard", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(
 			Model model, Board board,
 			HttpSession session) throws Exception{
@@ -125,14 +125,14 @@ public class BoardController {
 			  * 세션 id와 선택한 글 id와 계속 일치 */
 			accessId = board.getEmail();
 		}
-		boardDao.delete(board.getNumberId(), accessId);
+		boardDao.delete(board.getId(), accessId);
 		BoardList(model, START_DEFAULT_PAGE);
 		return "board/list";
 	}
 	
 	
 	//글 수정 - 세션 아이디가 일치한지 비교한 후 권한 설정. 
-	@RequestMapping(value = "/updateBoard", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(
 			Model model, Board board,
 			HttpSession session) throws Exception{

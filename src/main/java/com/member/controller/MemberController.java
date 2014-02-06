@@ -17,10 +17,10 @@ import com.member.domain.Member;
 import com.member.validator.IdCheckValidator;
 import com.member.validator.JoinValidator;
 import com.member.validator.LoginValidator;
-
+//http://localhost:8080/member/list
 @Controller
+@RequestMapping(value="/member")
 public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final int START_DEFAULT_PAGE = 0; //최소 시작 페이지 설정 [0부터 시작] 
 	private MemberDao memberDao;
 	
@@ -48,7 +48,7 @@ public class MemberController {
 		}
 		
 		//회원가입
-		@RequestMapping(value="/saveMember", method= RequestMethod.POST)
+		@RequestMapping(value="/save", method= RequestMethod.POST)
 		  public String save(
 				  Model model, HttpSession session,
 				  @ModelAttribute("commandJoin") Member member,
@@ -61,7 +61,7 @@ public class MemberController {
 			if(errors.hasErrors()){ 
 				return "home"; //가입 실패.
 			}else{
-				session.setAttribute("emailId", member.getEmailId());
+				session.setAttribute("email", member.getEmail());
 				memberDao.insertMember(member);
 				new BoardController().BoardList(model, START_DEFAULT_PAGE);
 				return "board/list";
@@ -69,30 +69,30 @@ public class MemberController {
 		  }
 		
 		// 가입 중복 아이디 체크
-		@RequestMapping(value="/memberIdCheck", method= RequestMethod.GET)
+		@RequestMapping(value="/idCheck", method= RequestMethod.GET)
 		public String idCheck(
 				Model model, 
-				@RequestParam String emailId,
+				@RequestParam String email,
 				@ModelAttribute("commandJoin") Member member,
 				BindingResult errors) throws Exception{
 			
 			memberDao = new MemberDao();
-			member = memberDao.idCheck(emailId);
-			if(member.getEmailId() !=null){
+			member = memberDao.idCheck(email);
+			if(member.getEmail() !=null){
 				new IdCheckValidator().validate(member, errors);
 			}
 			
 			if(errors.hasErrors()){
 				return "home";
 			}else{
-				model.addAttribute("emailId",emailId);
+				model.addAttribute("email",email);
 				return "home";
 			}
 		}
 		
 		//로그아웃
 		@RequestMapping(value = "/logout", method = RequestMethod.GET)
-		public String login(HttpSession session){
+		public String logout(HttpSession session){
 			session.invalidate();
 			return "home";
 		}
@@ -107,8 +107,8 @@ public class MemberController {
 			memberDao = new MemberDao();
 			
 			//DB값(memberDB)과 입력한값(member)과 비교 
-			if(member.getEmailId() != ""){ //이메일을 입력했을 때 DB접근
-				member = memberDao.checkMember(member.getEmailId(), member.getPass()); 
+			if(member.getEmail() != ""){ //이메일을 입력했을 때 DB접근
+				member = memberDao.checkMember(member.getEmail(), member.getPass()); 
 			}
 			
 			new LoginValidator().validate(member, errors);
@@ -116,7 +116,7 @@ public class MemberController {
 			if(errors.hasErrors()){
 				return "home"; //로그인 실패.
 			}else{
-				session.setAttribute("accessId", member.getEmailId());
+				session.setAttribute("accessId", member.getEmail());
 				new BoardController().BoardList(model, START_DEFAULT_PAGE);
 				return "board/list";
 			}
