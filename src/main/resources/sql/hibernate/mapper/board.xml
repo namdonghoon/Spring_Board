@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>   
+    <class name="com.member.domain.Board" table="board">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="email" type="string">
+            <column name="email" length="30" not-null="false" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="3000" not-null="false" />
+        </property>
+        <property name="date" type="timestamp">
+            <column name="date" not-null="false" />
+        </property>
+    </class>
+    
+</hibernate-mapping>

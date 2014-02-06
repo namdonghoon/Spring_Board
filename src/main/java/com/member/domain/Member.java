@@ -1,14 +1,28 @@
 package com.member.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="Member")
 public class Member {
+	
+	@Id
+	@Column(name="email")
 	private String email;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="pass")
 	private String pass;
+	
 	private String conpass;
 	
 	public Member(){}
-
-	
 
 	public Member(String email, String name, String pass, String conpass) {
 		super();
