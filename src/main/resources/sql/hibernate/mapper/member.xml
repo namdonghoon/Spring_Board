@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     
-    <class name="com.member.domain.Member" table="member">
+    <class name="com.member.domain.Member" table="member" lazy="false">
         <id name="email" type="string">
             <column name="email" length="30" not-null="false" />
         </id>

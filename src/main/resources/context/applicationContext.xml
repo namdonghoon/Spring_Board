@@ -38,8 +38,8 @@
 	        </property>
 	        <property name="mappingResources">
 	            <list>
-	                <value>/sql/hibernate/mapper/member.xml</value>
 	                <value>/sql/hibernate/mapper/board.xml</value>
+	                <value>/sql/hibernate/mapper/member.xml</value>
 	            </list>
 	        </property>
     	</bean>

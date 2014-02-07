@@ -2,13 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>   
-    <class name="com.member.domain.Board" table="board">
+    <class name="com.member.domain.Board" table="board" lazy="false">
         <id name="id" type="int">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="email" type="string">
+        <property name="email" type="string" lazy="false">
             <column name="email" length="30" not-null="false" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="30" not-null="false" />
         </property>
         <property name="content" type="string">
             <column name="content" length="3000" not-null="false" />

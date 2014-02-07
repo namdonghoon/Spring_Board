@@ -27,11 +27,7 @@ import com.member.validator.LoginValidator;
  */
 @Controller
 public class HomeController {
-	
-	@Inject
-	private MemberDaoTest memberDaoTest;
 
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() { 
 		return "home";
