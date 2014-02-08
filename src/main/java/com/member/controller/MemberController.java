@@ -4,16 +4,25 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.member.dao.BoardDaoTest;
 import com.member.dao.MemberDao;
@@ -36,22 +45,24 @@ public class MemberController {
 	@Inject
 	private MemberDaoTest memberDaoTest;
 	
-	//관리자 설정 : 아이디 설정에 따라 관리자 권한 설정 가능. 
-	public String managerId(){
-		String id="관리자";
-		return id;  
-	}
-	
 	//로그인 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(
-			Member member, Model model, HttpSession session) {
+		@Valid @ModelAttribute("member") Member member, BindingResult result, 
+		Model model, HttpSession session) {
 		
-		member = memberDaoTest.login(member.getEmail(), member.getPass());
-		session.setAttribute("accessId", member.getEmail());
-		list(model, START_DEFAULT_PAGE);
-		return "board/list";
+		if (result.hasErrors()) {
+			return "home";//
+		} else {
+			//member = memberDaoTest.login(member.getEmail(), member.getPass());
+			//session.setAttribute("accessId", member.getEmail());
+			return "home";
+			//list(model, START_DEFAULT_PAGE);
+			//return "board/list";
+		}
 	}
+
+	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session){

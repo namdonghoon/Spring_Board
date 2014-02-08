@@ -15,18 +15,18 @@
 
 
 
-<%-- <spring:hasBindErrors name="commandLogin"/> --%>
 <h3>로그인</h3>
 <div id="login_form"> 
-	<form action="/member/login" method="post"> 
+	<form:form action="/member/login" method="POST" modelAttribute="member" autocomplete="off">
+	
 		<label>이메일 : </label><input name="email" type="email">
-		<%-- <form:errors path="commandLogin.email"/> --%>
+		<form:errors path="email"/>
 		<br>
 		<label>암  호 : </label><input name="pass" type="password">
-		<%-- <form:errors path="commandLogin.pass"/> --%>
+		<form:errors path="pass"/>
 		<br>
 		<input type="submit" value="로그인">
-	</form>
+	</form:form>
 </div>
 <hr>
 

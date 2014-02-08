@@ -5,18 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
 
 @Entity
 @Table(name="Member")
 public class Member {
 	
 	@Id
+	@NotEmpty(message="이메일을 입력해주세요.")
 	@Column(name="email")
 	private String email;
 	
+	@NotEmpty(message="이름을 입력해주세요.")
 	@Column(name="name")
 	private String name;
 	
+	@Length(min = 2, max=10, message="2자리 이상 15자리 이하 입력해주세요.")
 	@Column(name="pass")
 	private String pass;
 	
