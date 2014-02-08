@@ -25,7 +25,7 @@ public class Member {
 	@Column(name="name")
 	private String name;
 	
-	@Length(min = 2, max=10, message="2자리 이상 15자리 이하 입력해주세요.")
+	@Length(min = 3, max=12, message="3~12 자리수로 입력해주세요.")
 	@Column(name="pass")
 	private String pass;
 	

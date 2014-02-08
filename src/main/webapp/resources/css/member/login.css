@@ -1,0 +1,30 @@
+@CHARSET "EUC-KR";
+
+#errer_message{
+	width: 420px auto;
+	height: 100px auto;
+	margin-bottom: 20px;
+	background-color: #FAE0D4
+}
+#login_form{
+	padding: 30px;
+	background: white;
+	width: 450px auto;
+	height: 220px auto;
+	border: solid 2px #BDBDBD;
+	border-radius: 10px;
+	top: 20%;
+	left: 20%;
+	position: absolute;
+}
+
+form{
+	top: 50%;
+	left: 50%;
+	position: static;
+}
+
+.errors{
+	font-size: 12px;
+	color: red;
+}

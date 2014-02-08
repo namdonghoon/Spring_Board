@@ -57,7 +57,7 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() { 
-		return "home";
+		return "member/home";
 	}
 	
 	//·Î±×ÀÎ 
@@ -67,7 +67,7 @@ public class MemberController {
 		Model model, HttpSession session) {
 		//Æû °ËÁõ 
 		if (result.hasErrors()) {
-			return "home";
+			return "member/home";
 		}
 		String resultURL = loginCheck(member, model, session);
 		return resultURL;
@@ -80,7 +80,7 @@ public class MemberController {
 			Model model, HttpSession session) {
 		//Æû °ËÁõ 
 		if (result.hasErrors()) {
-			return "login";
+			return "member/login";
 		}
 		String resultURL = loginCheck(member, model, session);
 		return resultURL;
