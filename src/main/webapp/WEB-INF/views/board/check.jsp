@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
 <script src="../resources/script/board/check.js" type="text/javascript"></script>
-<link rel="stylesheet" href="../resources/css/board/check.css" type="text/css"/>
+<link href="../resources/css/board/check.css" rel="stylesheet" type="text/css"/>
 <title>Insert title here</title>
 </head> 
 <body>

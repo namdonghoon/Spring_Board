@@ -1,5 +1,7 @@
 package com.member.domain;
 
+import java.lang.annotation.Documented;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +22,6 @@ public class Member {
 	@Column(name="email")
 	private String email;
 	
-	@NotEmpty(message="이름을 입력해주세요.")
 	@Column(name="name")
 	private String name;
 	

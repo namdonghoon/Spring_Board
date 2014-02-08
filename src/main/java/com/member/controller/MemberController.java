@@ -3,6 +3,7 @@ package com.member.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.Validator;
@@ -45,45 +46,81 @@ public class MemberController {
 	@Inject
 	private MemberDaoTest memberDaoTest;
 	
-	//로그인 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(
-		@Valid @ModelAttribute("member") Member member, BindingResult result, 
-		Model model, HttpSession session) {
-		
-		if (result.hasErrors()) {
-			return "home";//
-		} else {
-			//member = memberDaoTest.login(member.getEmail(), member.getPass());
-			//session.setAttribute("accessId", member.getEmail());
-			return "home";
-			//list(model, START_DEFAULT_PAGE);
-			//return "board/list";
-		}
-	}
-
-	
-	//로그아웃
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session){
-		session.invalidate();
-		return "home";
-	}
-	
-	
 	//회원가입 
 	@RequestMapping(value="/save", method= RequestMethod.POST)
 	public String save(
 			Member member, Model model, HttpSession session){
 		memberDaoTest.save(member);
 		session.setAttribute("accessId", member.getEmail());
-		list(model, START_DEFAULT_PAGE);
+		getList(model, START_DEFAULT_PAGE);
 		return "board/list";
+	}
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() { 
+		return "home";
+	}
+	
+	//로그인 
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(
+		@Valid @ModelAttribute("member") Member member, BindingResult result, 
+		Model model, HttpSession session) {
+		//폼 검증 
+		if (result.hasErrors()) {
+			return "home";
+		}
+		String resultURL = loginCheck(member, model, session);
+		return resultURL;
+	}
+	
+	//재 로그인 
+	@RequestMapping(value = "/loginRe", method = RequestMethod.POST)
+	public String loginRe(
+			@Valid @ModelAttribute("member") Member member, BindingResult result, 
+			Model model, HttpSession session) {
+		//폼 검증 
+		if (result.hasErrors()) {
+			return "login";
+		}
+		String resultURL = loginCheck(member, model, session);
+		return resultURL;
+	}
+	
+	//아이디, 암호 체크 
+	public String loginCheck(Member member, Model model, HttpSession session){
+		
+		//아이디 체크 
+		Member memberId = memberDaoTest.idCheck(member.getEmail());
+		if(memberId == null){
+			model.addAttribute("emailErrer", true);
+			return "member/login";
+		}
+		
+		//아이디의 암호 체크
+		Member memberPass = memberDaoTest.passCheck(memberId.getEmail(), member.getPass());
+		if(memberPass == null){
+			model.addAttribute("passErrer", true);
+			return "member/login";
+		}else{//정상 접속 
+			session.setAttribute("accessId", memberPass.getEmail());
+			model.addAttribute("member", memberPass);
+			getList(model, START_DEFAULT_PAGE);
+			return "board/list";
+		}
+	}
+	
+	//로그아웃
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "member/home";
 	}
 	
 	
+	
+	
 	//게시판 리스트  (페이징처리 포함 )
-	public void list(Model model, int pageNum){
+	public void getList(Model model, int pageNum){
 		
 		int writeTotalCount = memberDaoTest.totalPage(); //전체 글 개수 
 		int pageTotalCount = (writeTotalCount / WRITING_MAX_COUNT); //전체 페이지 계산 

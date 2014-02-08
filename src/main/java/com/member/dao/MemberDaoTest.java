@@ -22,9 +22,18 @@ public class MemberDaoTest {
 	private SessionFactory sessionFactory;
  
 
-	
-	//로그인 
-	public Member login(String email, String pass) {
+	//로그인 : 아이디
+	public Member idCheck(String email) { //load 함수의 찾는 결과가 없을때 null이 아닌. 에러발생.
+		Member member;
+		try {
+			member = (Member) this.sessionFactory.getCurrentSession().load(Member.class, email);
+		} catch (Exception e) {
+			member = null;
+		}
+		return member; 
+	}  
+	//로그인 : 암호 
+	public Member passCheck(String email, String pass) {
 	    Session session = this.sessionFactory.getCurrentSession();
 	    String sql = "from Member where email = ? and pass = ?";
 	    Query query = session.createQuery(sql);
