@@ -1,116 +1,80 @@
 package com.member.dao;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.member.db.DBConnect;
+import javax.inject.Inject;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.member.domain.Board;
 import com.member.domain.Member;
 
+@Transactional
+@Repository
 public class MemberDao {
-	private Connection conn;
 	
-	public MemberDao(){
-		conn = new DBConnect().getConn();
-	}
-	
-	//회원가입 
-	public void insertMember(Member member) throws SQLException {
-		PreparedStatement  pstmt = null;
-		String sql = "insert into MEMBER values(?,?,?)";
+	@Inject   //오토와이어와 일치.
+	private SessionFactory sessionFactory;
+ 
+
+	//로그인 : 아이디
+	public Member idCheck(String email) { //load 함수의 찾는 결과가 없을때 null이 아닌. 에러발생.
+		Member member;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getEmail());
-			pstmt.setString(2, member.getName());
-			pstmt.setString(3, member.getPass());
-			pstmt.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		}
-	}
-	
-	//회원정보 획득
-	public Member checkMember(String id, String pass) throws SQLException {
-		PreparedStatement  pstmt = null;
-		ResultSet rs = null;
-		Member member = new Member();
-		
-		String sql = "select * from Member where email=? and pass=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pass);
-
-			rs = pstmt.executeQuery(); // 결과값을 가져옴
-
-			if (rs.next()) {
-				member.setEmail(rs.getString(1));
-				member.setName(rs.getString(2));
-				member.setPass(rs.getString(3));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			if (pstmt != null) {
-				pstmt.close();
-			}		
-			if (rs != null) {
-				rs.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}	
-		}
-		return member;
-	}
-
-	
-	
-	//아이디 중복 체크 
-	public Member idCheck(String email) throws Exception{
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "select * from Member where email=?";
-		Member member = new Member();
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, email);
-
-			rs = pstmt.executeQuery(); // 결과값을 가져옴
-
-			if (rs.next()) {
-				member.setEmail(rs.getString(1));
-				member.setName(rs.getString(2));
-				member.setPass(rs.getString(3));
-			}
+			member = (Member) this.sessionFactory.getCurrentSession().load(Member.class, email);
 		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}if(rs != null){
-				rs.close();
-			}
+			member = null;
 		}
-		return member;
-	} 
-
+		return member; 
+	}  
+	//로그인 : 암호 
+	public Member passCheck(String email, String pass) {
+	    Session session = this.sessionFactory.getCurrentSession();
+	    String sql = "from Member where email = ? and pass = ?";
+	    Query query = session.createQuery(sql);
+	    query.setParameter(0, email);
+	    query.setParameter(1, pass);
+	   
+	    Member member = (Member) query.uniqueResult();
+	    return member; 
+	}  
+	//회원가입 
+	public void save(Member member) { 
+		this.sessionFactory.getCurrentSession().save(member);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Board 외부영역 글목록 갱신하기위해 필요 
+	//전체 게시글 갯수 
+    public int totalPage() {
+        return this.sessionFactory.getCurrentSession().createQuery("FROM Board").list().size();
+    }
+    //페이징 처리 
+    @SuppressWarnings("unchecked")
+	public List<Board> list(int firstPage, int maxPage){
+		Session session = this.sessionFactory.getCurrentSession();
+	    Criteria crit = session.createCriteria(Board.class);
+	    crit.addOrder( Order.desc("id") );
+	    crit.setFirstResult(firstPage);
+	    crit.setMaxResults(maxPage);
+	    List<Board> list =  crit.list();
+	    
+	    
+		return list;
+	}
+	
+	
+	
 }

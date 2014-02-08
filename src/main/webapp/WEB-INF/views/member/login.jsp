@@ -18,13 +18,13 @@
 	<input id="email_errer" type="hidden" value="${emailErrer}">
 	<input id="pass_errer" type="hidden" value="${passErrer}">
 	</div> 
-	<form:form action="/member/loginRe" method="POST" modelAttribute="member" autocomplete="off">
+	<form:form action="/member/loginRe" method="POST" modelAttribute="login" autocomplete="off">
 	
 		<label>이메일 : </label><input name="email" type="email" value="${email}">
 		<form:errors path="email" cssClass="errors"/>
 		<br>
 		<label>암  호 : </label><input name="pass" type="password">
-		<form:errors path="pass" cssClass="errors"/>
+		<form:errors path="pass" cssClass="errors" />
 		<br>
 		<input type="submit" value="로그인">
 		<input type="button" onclick="location.href='/member/join'" value="회원가입">

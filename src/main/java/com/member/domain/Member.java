@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.validation.constraints.AssertTrue;
+import org.hibernate.annotations.Any;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.Filter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -22,12 +25,14 @@ public class Member {
 	@Column(name="email")
 	private String email;
 	
+	@NotEmpty(message="이름을 입력해주세요.")
 	@Column(name="name")
 	private String name;
 	
 	@Length(min = 3, max=12, message="3~12 자리수로 입력해주세요.")
 	@Column(name="pass")
 	private String pass;
+	
 	
 	private String conpass;
 	
