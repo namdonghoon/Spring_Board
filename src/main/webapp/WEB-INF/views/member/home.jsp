@@ -16,11 +16,13 @@
 <h3>로그인</h3>
 <div id="login_form"> 
 	<form:form action="/member/login" method="POST" modelAttribute="login" autocomplete="off">
-	
-		<label>이메일 : </label><input name="email" type="email">
+		<input name="name" type="hidden" value="empty">
+		<label>이메일 : </label>
+		<input name="email" type="email">
 		<form:errors path="email" cssClass="errors"/>
 		<br>
-		<label>암  호 : </label><input name="pass" type="password">
+		<label>암  호 : </label>
+		<input name="pass" type="password">
 		<form:errors path="pass" cssClass="errors"/>
 		<br>
 		<input type="submit" value="로그인">

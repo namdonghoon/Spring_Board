@@ -33,7 +33,6 @@ public class Member {
 	@Column(name="pass")
 	private String pass;
 	
-	
 	private String conpass;
 	
 	public Member(){}

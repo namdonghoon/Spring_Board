@@ -75,8 +75,7 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(
 		@Valid @ModelAttribute("login") Member member, BindingResult result, 
-		Model model, HttpSession session) {
-		
+		Model model, HttpSession session) { 
 		//폼 검증 
 		if (result.hasErrors()) {
 			return "member/home";
@@ -88,7 +87,7 @@ public class MemberController {
 	//재 로그인 
 	@RequestMapping(value = "/loginRe", method = RequestMethod.POST)
 	public String loginRe(
-			@Valid @ModelAttribute("member") Member member, BindingResult result, 
+			@Valid @ModelAttribute("login") Member member, BindingResult result, 
 			Model model, HttpSession session) {
 		//폼 검증 
 		if (result.hasErrors()) {
@@ -100,7 +99,6 @@ public class MemberController {
 	
 	//아이디, 암호 체크 
 	public String loginCheck(Member member, Model model, HttpSession session){
-		
 		//아이디 체크 
 		Member memberId = memberDao.idCheck(member.getEmail());
 		if(memberId == null){
