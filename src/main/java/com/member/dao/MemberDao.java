@@ -24,13 +24,13 @@ public class MemberDao {
 
 	//로그인 : 아이디
 	public Member idCheck(String email) { //load 함수의 찾는 결과가 없을때 null이 아닌. 에러발생.
-		Member member;
-		try {
-			member = (Member) this.sessionFactory.getCurrentSession().load(Member.class, email);
-		} catch (Exception e) {
-			member = null;
-		}
-		return member; 
+		 Session session = this.sessionFactory.getCurrentSession();
+	    String sql = "from Member where email = ?";
+	    Query query = session.createQuery(sql);
+	    query.setParameter(0, email);
+	   
+	    Member member = (Member) query.uniqueResult();
+	    return member; 
 	}  
 	//로그인 : 암호 
 	public Member passCheck(String email, String pass) {

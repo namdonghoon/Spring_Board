@@ -5,12 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.member.dao.MemberDao;
 import com.member.domain.Board;
 import com.member.domain.Member;
@@ -99,6 +101,7 @@ public class MemberController {
 	
 	//아이디, 암호 체크 
 	public String loginCheck(Member member, Model model, HttpSession session){
+		
 		//아이디 체크 
 		Member memberId = memberDao.idCheck(member.getEmail());
 		if(memberId == null){

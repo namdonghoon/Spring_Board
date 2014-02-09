@@ -19,7 +19,7 @@
 	<input id="pass_errer" type="hidden" value="${passErrer}">
 	</div> 
 	<form:form action="/member/loginRe" method="POST" modelAttribute="login" autocomplete="off">
-	
+		<input name="name" type="hidden" value="empty">
 		<label>¿Ã∏ﬁ¿œ : </label><input name="email" type="email" value="${email}">
 		<form:errors path="email" cssClass="errors"/>
 		<br>
