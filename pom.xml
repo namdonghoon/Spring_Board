@@ -189,9 +189,11 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.0.2.Final</version>
 		</dependency>
-            
-        
+                    
         <!-- hibernate dependency 설정 end -->
+
+
+
 
 
 

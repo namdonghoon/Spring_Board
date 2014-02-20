@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<spring:hasBindErrors name="commandWriter"/>
+
 <h1>글쓰기 폼</h1>
 <form action="/board/save" method="post">
 <input value="${accessId}" name="email" type="hidden">
@@ -20,13 +20,14 @@
 <div>
 	<label>제목</label>
 	<input name="title" type="text">
-	<form:errors path="commandWriter.title"/>
+	<%-- <form:errors path="commandWriter.title"/> --%>
 </div>
 <div>
 	<label>내용</label>
 	<textarea name="content" rows="40" cols="60"></textarea>
-</div>
+</div> 
 <input type="submit" value="글쓰기">
+<input type="button" value="글목록" onclick="location.href ='/board/listBack'">
 </form>
 </body>
 </html>

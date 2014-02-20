@@ -38,6 +38,7 @@
 	<input value="${board.email}" name="email" type="hidden">
 	<input value="${board.id}" name="id" type="hidden">
 	<input id="bt_delete" type="submit" value="삭제">
+	<input id="bt_list" type="button" value="글목록" onclick="location.href ='/board/listBack'">
 
 </form>
 </body>

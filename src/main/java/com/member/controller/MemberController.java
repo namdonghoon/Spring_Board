@@ -22,20 +22,20 @@ import com.member.domain.Member;
 @RequestMapping(value="/member")
 public class MemberController {	
 	
-	private final int START_DEFAULT_PAGE = 0; //ÃÖ¼Ò ½ÃÀÛ ÆäÀÌÁö ¼³Á¤ [0ºÎÅÍ ½ÃÀÛ] 
-	private final int WRITING_MAX_COUNT = 10;   //ÇÑ ÆäÀÌÁö´ç ±Û ¼ö 
-	private final int PAGE_MAX_COUNT=5;   // ÀüÃ¼ ÆäÀÌÁö ÀüÈ¯ ¼ö 
+	private final int START_DEFAULT_PAGE = 0; //å ìŒì‡½ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ [0å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™] 
+	private final int WRITING_MAX_COUNT = 10;   //å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™ å ì™ì˜™ 
+	private final int PAGE_MAX_COUNT=5;   // å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™í™˜ å ì™ì˜™ 
 	
 	@Inject
 	private MemberDao memberDao;
 	
-	//È¸¿ø°¡ÀÔ 
+	//íšŒå ì™ì˜™å ì™ì˜™ 
 	@RequestMapping(value="/save", method= RequestMethod.POST)
 	public String save(
 			@Valid @ModelAttribute("save") Member member, BindingResult result, 
 			Model model, HttpSession session){
 		
-		//Æû °ËÁõ 
+		//å ì™ì˜™ å ì™ì˜™å ì™ì˜™ 
 		if (result.hasErrors()) {
 			return "member/home";
 		}
@@ -50,19 +50,19 @@ public class MemberController {
 		return "member/home";
 	}
 	
-	//¾ÆÀÌµğ Áßº¹È®ÀÎ.
+	//å ì™ì˜™å ì‹±ë“¸ì˜™ å ìŒ©ë¸ì˜™í™•å ì™ì˜™.
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
 	public String emailCheck(Model model, Member member){
 		Member memberId = memberDao.idCheck(member.getEmail());
-		if(memberId != null){ //ÀÌ¸ŞÀÏ Áßº¹
+		if(memberId != null){ //å ì‹±ëªŒì˜™å ì™ì˜™ å ìŒ©ë¸ì˜™
 			model.addAttribute("emailErrer", true);
 			return "member/home";
-		}else{ //Áßº¹¾Æ´Ò ½Ã ¾ÆÀÌµğ¸¦ °¡Á®°¨.
+		}else{ //å ìŒ©ë¸ì˜™å ì‹£ëŒì˜™ å ì™ì˜™ å ì™ì˜™å ì‹±ë“¸ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™.
 			model.addAttribute("email", member.getEmail());
 			return "member/home";
 		}
 	}
-	//È®ÀÎ ÆĞ½º¿öµå Ã¼Å©  
+	//í™•å ì™ì˜™ å ì‹»ì™ì˜™å ì™ì˜™å ì™ì˜™ ì²´í¬  
 //	@RequestMapping(value = "/passCheck", method = RequestMethod.GET)
 //	public String passCheck(Model model, Member member){
 //		if(member.getPass().equals(member.getConpass())){
@@ -73,12 +73,12 @@ public class MemberController {
 //		}
 //	}
 	
-	//·Î±×ÀÎ 
+	//å ì‹¸ê¹ì˜™å ì™ì˜™ 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(
 		@Valid @ModelAttribute("login") Member member, BindingResult result, 
 		Model model, HttpSession session) { 
-		//Æû °ËÁõ 
+		//å ì™ì˜™ å ì™ì˜™å ì™ì˜™ 
 		if (result.hasErrors()) {
 			return "member/home";
 		}
@@ -86,12 +86,12 @@ public class MemberController {
 		return resultURL;
 	}
 	
-	//Àç ·Î±×ÀÎ 
+	//å ì™ì˜™ å ì‹¸ê¹ì˜™å ì™ì˜™ 
 	@RequestMapping(value = "/loginRe", method = RequestMethod.POST)
 	public String loginRe(
 			@Valid @ModelAttribute("login") Member member, BindingResult result, 
 			Model model, HttpSession session) {
-		//Æû °ËÁõ 
+		//å ì™ì˜™ å ì™ì˜™å ì™ì˜™ 
 		if (result.hasErrors()) {
 			return "member/login";
 		}
@@ -99,22 +99,22 @@ public class MemberController {
 		return resultURL;
 	}
 	
-	//¾ÆÀÌµğ, ¾ÏÈ£ Ã¼Å© 
+	//å ì™ì˜™å ì‹±ë“¸ì˜™, å ì™ì˜™í˜¸ ì²´í¬ 
 	public String loginCheck(Member member, Model model, HttpSession session){
 		
-		//¾ÆÀÌµğ Ã¼Å© 
+		//å ì™ì˜™å ì‹±ë“¸ì˜™ ì²´í¬ 
 		Member memberId = memberDao.idCheck(member.getEmail());
 		if(memberId == null){
 			model.addAttribute("emailErrer", true);
 			return "member/login";
 		}
 		
-		//¾ÆÀÌµğÀÇ ¾ÏÈ£ Ã¼Å©
+		//å ì™ì˜™å ì‹±ë“¸ì˜™å ì™ì˜™ å ì™ì˜™í˜¸ ì²´í¬
 		Member memberPass = memberDao.passCheck(memberId.getEmail(), member.getPass());
 		if(memberPass == null){
 			model.addAttribute("passErrer", true);
 			return "member/login";
-		}else{//Á¤»ó Á¢¼Ó 
+		}else{//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ 
 			session.setAttribute("accessId", memberPass.getEmail());
 			model.addAttribute("member", memberPass);
 			getList(model, START_DEFAULT_PAGE);
@@ -122,7 +122,7 @@ public class MemberController {
 		}
 	}
 	
-	//·Î±×¾Æ¿ô
+	//å ì‹¸ê·¸ì•„ìš¸ì˜™
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session){
 		session.invalidate();
@@ -132,11 +132,11 @@ public class MemberController {
 	
 	
 	
-	//°Ô½ÃÆÇ ¸®½ºÆ®  (ÆäÀÌÂ¡Ã³¸® Æ÷ÇÔ )
+	//å ìŒ‰ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸  (å ì™ì˜™å ì™ì˜™ì§•ì²˜å ì™ì˜™ å ì™ì˜™å ì™ì˜™ )
 	public void getList(Model model, int pageNum){
 		
-		int writeTotalCount = memberDao.totalPage(); //ÀüÃ¼ ±Û °³¼ö 
-		int pageTotalCount = (writeTotalCount / WRITING_MAX_COUNT); //ÀüÃ¼ ÆäÀÌÁö °è»ê 
+		int writeTotalCount = memberDao.totalPage(); //å ì™ì˜™ì²´ å ì™ì˜™ å ì™ì˜™å ì™ì˜™ 
+		int pageTotalCount = (writeTotalCount / WRITING_MAX_COUNT); //å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½
 		int startPage = (pageNum/PAGE_MAX_COUNT) *PAGE_MAX_COUNT +1; //
 	
 		int endPage=0;
@@ -150,7 +150,7 @@ public class MemberController {
 		int writeStarNum = ((pageNum) * WRITING_MAX_COUNT);
 		List<Board> list = memberDao.list(writeStarNum, WRITING_MAX_COUNT);
 		model.addAttribute("list", list);
-		model.addAttribute("pageNum", pageNum); //¼±ÅÃÇÑ ±Û¹øÈ£ Àü¼Û
+		model.addAttribute("pageNum", pageNum); //å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒœë±„ì˜™í˜¸ å ì™ì˜™å ï¿½		
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageTotalCount", pageTotalCount);

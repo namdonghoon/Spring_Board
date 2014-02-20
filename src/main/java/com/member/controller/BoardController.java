@@ -116,6 +116,14 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	//글목록
+	@RequestMapping(value = "/listBack", method = RequestMethod.GET)
+	public String list(Model model){
+		//limit가 0부터 시작하므로 페이지 1에서 0으로 만들어주기 위해 1을 뺌. 
+		list(model, START_DEFAULT_PAGE);
+		return "board/list"; 
+	}
+	
 
 	
 	

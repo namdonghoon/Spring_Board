@@ -54,16 +54,16 @@
 	
 	
 	<!-- JOSSO  -->
-	<!--  <filter>
+	 <!-- <filter>
 		<filter-name>jossoAgent</filter-name>
 		<filter-class>pnus.josso.LoginFilter</filter-class> 
 		<init-param>
 			<param-name>jossoGatewayLoginUrl</param-name>
-			<param-value>http://localhost:8080/josso/signon/login.do</param-value> 
+			<param-value>http://localhost/josso/signon/login.do</param-value> 
 		</init-param>
 		<init-param>
 			<param-name>jossoGatewayLogoutUrl</param-name>
-			<param-value>http://localhost:8080/josso/signon/logout.do</param-value> 
+			<param-value>http://localhost/josso/signon/logout.do</param-value> 
 		</init-param>
 		<init-param>
 			<param-name>jossoEndpoint</param-name>
